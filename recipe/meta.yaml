@@ -6,24 +6,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-stracking-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-stracking-{{ version }}.tar.gz
   sha256: 8a6d83b04ab8466742bc7bf03cd57b8e8556de46afc156cebbc961d5cbe61779
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
     - setuptools-scm
   run:
     - napari
     - napari-plugin-engine >=0.1.4
     - numpy
-    - python >=3.7
+    - python >={{ python_min }}
     - stracking >=0.1.9
 
 test:
@@ -33,6 +33,7 @@ test:
     - pip list
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/sylvainprigent/napari-stracking
